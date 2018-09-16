@@ -5,10 +5,10 @@ class TodoItem extends React.Component {
   constructor(props) {
     super(props);
     this.handleLiDeleteClick = this.handleLiDeleteClick.bind(this);
-    }
+  }
 
   handleLiDeleteClick() {
-    const { handleLiClick, index} = this.props;
+    const { handleLiClick, index } = this.props;
     handleLiClick(index);
   }
 
