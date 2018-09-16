@@ -23,6 +23,15 @@ class TodoList extends React.Component {
     })
   }
 
+  handleLiClick(index){
+    // 操作state推荐做法
+    const list = [...this.state.list];
+    list.splice(index, 1);
+    this.setState({
+        list
+    })
+  }
+
   render() {
     return (
       <div>
@@ -33,7 +42,7 @@ class TodoList extends React.Component {
         <ul>
           {
             this.state.list.map((item, index) => {
-              return <li key={index}>{item}</li>
+              return <li key={index} onClick={this.handleLiClick.bind(this, index)}>{item}</li>
             })
           }
         </ul>
