@@ -1,8 +1,9 @@
 import React from 'react';
+import TodoItem from "./TodoItem";
 
 class TodoList extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       list: [],
@@ -10,22 +11,23 @@ class TodoList extends React.Component {
     }
   }
 
-  handleButtonClick(){
+  handleButtonClick() {
     this.setState({
         list: [...this.state.list, this.state.inputValue],
         inputValue: ''
     })
   }
 
-  handleInputChange(e){
+  handleInputChange(e) {
     this.setState({
         inputValue: e.target.value
     })
   }
 
-  handleLiClick(index){
+  handleLiClick(index) {
     // 操作state推荐做法
     const list = [...this.state.list];
+    // 去除数组中的某个值
     list.splice(index, 1);
     this.setState({
         list
@@ -42,7 +44,7 @@ class TodoList extends React.Component {
         <ul>
           {
             this.state.list.map((item, index) => {
-              return <li key={index} onClick={this.handleLiClick.bind(this, index)}>{item}</li>
+              return <TodoItem key={index} index={index} content={item} handleLiClick={this.handleLiClick.bind(this)} />
             })
           }
         </ul>
