@@ -5,13 +5,21 @@ class TodoList extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      list: []
+      list: [],
+      inputValue: ''
     }
   }
 
   handleButtonClick(){
     this.setState({
-        list: [...this.state.list, 'hello']
+        list: [...this.state.list, this.state.inputValue],
+        inputValue: ''
+    })
+  }
+
+  handleInputChange(e){
+    this.setState({
+        inputValue: e.target.value
     })
   }
 
@@ -19,7 +27,7 @@ class TodoList extends React.Component {
     return (
       <div>
         <div>
-          <input type="text"/>
+          <input type="text" value={this.state.inputValue} onChange={this.handleInputChange.bind(this)} />
           <button onClick={this.handleButtonClick.bind(this)}>添加</button>
         </div>
         <ul>
