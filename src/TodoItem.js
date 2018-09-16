@@ -2,17 +2,26 @@ import React from 'react';
 
 class TodoItem extends React.Component {
 
-    handleLiClick() {
-        this.props.handleLiClick(this.props.index)
+  constructor(props) {
+    super(props);
+    this.handleLiDeleteClick = this.handleLiDeleteClick.bind(this);
     }
 
-    render() {
-        return (
-            <li onClick={this.handleLiClick.bind(this)}>
-                {this.props.content}
-            </li>
-        )
-    }
+  handleLiDeleteClick() {
+    const { handleLiClick, index} = this.props;
+    handleLiClick(index);
+  }
+
+  render() {
+
+    const { content } = this.props;
+
+    return (
+      <li onClick={this.handleLiDeleteClick}>
+         {content}
+      </li>
+    )
+  }
 }
 
 export default TodoItem;

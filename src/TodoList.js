@@ -8,19 +8,23 @@ class TodoList extends React.Component {
     this.state = {
       list: [],
       inputValue: ''
-    }
+    };
+    // 优化执行性能
+    this.handleButtonClick = this.handleButtonClick.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleLiClick = this.handleLiClick.bind(this);
   }
 
   handleButtonClick() {
     this.setState({
-        list: [...this.state.list, this.state.inputValue],
-        inputValue: ''
+      list: [...this.state.list, this.state.inputValue],
+      inputValue: ''
     })
   }
 
   handleInputChange(e) {
     this.setState({
-        inputValue: e.target.value
+      inputValue: e.target.value
     })
   }
 
@@ -30,22 +34,35 @@ class TodoList extends React.Component {
     // 去除数组中的某个值
     list.splice(index, 1);
     this.setState({
-        list
+      list
     })
+  }
+
+  getTodoListItem() {
+    return (
+      this.state.list.map((item, index) => {
+        return (
+          <TodoItem
+            key={index}
+            index={index}
+            content={item}
+            handleLiClick={this.handleLiClick}
+          />
+        )
+      })
+    )
   }
 
   render() {
     return (
       <div>
         <div>
-          <input type="text" value={this.state.inputValue} onChange={this.handleInputChange.bind(this)} />
-          <button onClick={this.handleButtonClick.bind(this)}>添加</button>
+          <input type="text" value={this.state.inputValue} onChange={this.handleInputChange} />
+          <button onClick={this.handleButtonClick}>添加</button>
         </div>
         <ul>
           {
-            this.state.list.map((item, index) => {
-              return <TodoItem key={index} index={index} content={item} handleLiClick={this.handleLiClick.bind(this)} />
-            })
+            this.getTodoListItem()
           }
         </ul>
       </div>
